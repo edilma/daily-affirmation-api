@@ -1,6 +1,8 @@
 import dbConnect from "./dbConnect.js";
 import { FieldValue } from "firebase-admin/firestore";
 
+
+
 export async function getAff (req,res){
     console.log("Getaff")
     const db = dbConnect();
@@ -55,3 +57,27 @@ export function addAffirmation(req,res){
         res.status(500).send({success: false, mesage: error.mesage})
     })
 }
+
+export async function deleteOneAffirmation(req,res){
+    const {affirmationId} = req.params;
+    const db = dbConnect();
+    const affirmationCollection = await db.collection("affirmations")
+        .doc(affirmationId).delete()
+        .then(()=>getAllAffirmations(req,res))
+        .catch(err=>res.status(500).send({error:err.mesage}))
+     
+}
+
+// test if this function will work 
+// export function deleteAff (req,res){
+//     const {affirmationId} = req.params;
+//     const theAff = getOneAffirmation(affirmationId,res)
+//     theAff.delete()
+//     .then(()=>getAllAffirmations(req,res))
+//     .catch(err=>res.status(500).send({error:err.mesage}))
+
+// }
+
+
+
+
