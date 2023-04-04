@@ -12,8 +12,6 @@ export async function getAff (req,res){
     
 }
 
-
-
 //Get All affirmations
 export async function getAllAffirmations(req,res){
     const db = dbConnect();
@@ -58,13 +56,31 @@ export function addAffirmation(req,res){
     })
 }
 
+//update one affirmation
+// export async function updateOneAffirmation(req,res){
+//     const{affirmationId} = req.params;
+//     const{text,author} = req.body;
+//     const db = dbConnect();
+//     const theAffirmation = await db.collection("affirmations")
+//         .doc(affirmationId).update({
+//             text: text,
+//             author: author
+//         })
+//         .then(()=>getAllAffirmations(req,res))
+//         .catch(err=>res.status(500).send({error:err.message}))
+   
+    
+// }
+
+
 export async function deleteOneAffirmation(req,res){
     const {affirmationId} = req.params;
+   
     const db = dbConnect();
     const affirmationCollection = await db.collection("affirmations")
         .doc(affirmationId).delete()
         .then(()=>getAllAffirmations(req,res))
-        .catch(err=>res.status(500).send({error:err.mesage}))
+        .catch(err=>res.status(500).send({error:err.message}))
      
 }
 

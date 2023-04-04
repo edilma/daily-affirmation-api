@@ -1,7 +1,7 @@
 import functions from "firebase-functions"
 import express from "express"
 import cors from "cors"
-import { addAffirmation, getAllAffirmations , getOneAffirmation, deleteOneAffirmation, deleteAff} from "./src/affirmations.js"
+import { addAffirmation, getAllAffirmations , getOneAffirmation, deleteOneAffirmation} from "./src/affirmations.js"
 
 const app = express();
     app.use(cors())
@@ -25,6 +25,8 @@ app.post("/affirmations",addAffirmation)
 
 app.delete("/affirmations/:affirmationId",deleteOneAffirmation)
 
-app.delete("/delete/:affirmationID", deleteAff)
+//app.delete("/delete/:affirmationID", deleteAff)
+//app.patch("/affirmations/:affirmationId", updateOneAffirmation)
+
 
 export const api = functions.https.onRequest(app)
